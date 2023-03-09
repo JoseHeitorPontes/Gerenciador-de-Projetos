@@ -7,7 +7,7 @@ export function useProjects() {
 
     async function fetchProjects() {
         try {
-            const { data } = await api.get("/projetos");
+            const { data } = await api.get("/projects");
             setProjects(data);
         } catch (error) {
             console.log(error);

@@ -20,7 +20,7 @@ export function NewRegister() {
         event.preventDefault();
 
         try {
-            await api.post("/projetos", {
+            await api.post("/projects", {
                 name,
                 budget,
                 category

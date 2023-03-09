@@ -30,7 +30,7 @@ export function Projects() {
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                api.delete(`/projetos/${project.id}`).then(() => fetchProjects());
+                api.delete(`/projects/${project.id}`).then(() => fetchProjects());
             }
         });
     }

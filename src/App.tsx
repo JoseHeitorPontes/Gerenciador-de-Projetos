@@ -5,7 +5,7 @@ import { Header } from './components/Header';
 import { Home } from './pages/Home';
 import { NewRegister } from "./pages/NewProject";
 import { Projects } from './pages/Projects';
-import { Project } from './pages/Project';
+import { UpdateProject } from './pages/UpdateProject';
 
 import { ToastContainer } from 'react-toastify';
 import { Footer } from './components/Footer';
@@ -24,7 +24,7 @@ function App() {
               <Route path="/" element={<Home/>} />
               <Route path="/novo-projeto" element={<NewRegister/>} />
               <Route path="/projetos" element={<Projects/>} />
-              <Route path="/projeto/:id" element={<Project/>} />
+              <Route path="/projeto/:id" element={<UpdateProject/>} />
             </Routes>
           </Row>
         </Container>
