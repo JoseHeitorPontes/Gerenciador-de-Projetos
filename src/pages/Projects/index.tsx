@@ -65,7 +65,7 @@ export function Projects() {
                                             <Button
                                                 variant="success"
                                                 className="mx-1"
-                                                onClick={() => navigate("/editar-projeto")}
+                                                onClick={() => navigate(`/projeto/${project.id}`)}
                                             >
                                                 Editar
                                                 <MdEdit className="ms-2"/>

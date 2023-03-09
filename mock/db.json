@@ -11,6 +11,18 @@
       "budget": "1000",
       "category": "Desenvolvimento",
       "id": 2
+    },
+    {
+      "name": "Design Banner",
+      "budget": "1000",
+      "category": "Design",
+      "id": 3
+    },
+    {
+      "name": "Site Moranguinho",
+      "budget": "2000",
+      "category": "Desenvolvimento",
+      "id": 4
     }
   ]
 }

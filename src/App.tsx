@@ -5,7 +5,7 @@ import { Header } from './components/Header';
 import { Home } from './pages/Home';
 import { NewRegister } from "./pages/NewProject";
 import { Projects } from './pages/Projects';
-import { EditProject } from './pages/EditProject';
+import { Project } from './pages/Project';
 
 import { ToastContainer } from 'react-toastify';
 import { Footer } from './components/Footer';
@@ -21,10 +21,10 @@ function App() {
           <ToastContainer />
           <Row>
             <Routes>
-              <Route path="/" element={<Home/>} />
-              <Route path="/novo-projeto" element={<NewRegister/>} />
-              <Route path="/projetos" element={<Projects/>} />
-              <Route path="/editar-projeto" element={<EditProject/>} />
+              <Route path="/" element={<Home />} />
+              <Route path="/novo-projeto" element={<NewRegister />} />
+              <Route path="/projetos" element={<Projects />} />
+              <Route path="/projeto/:id" element={<Project />} />
             </Routes>
           </Row>
         </Container>
