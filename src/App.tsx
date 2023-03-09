@@ -21,10 +21,10 @@ function App() {
           <ToastContainer />
           <Row>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/novo-projeto" element={<NewRegister />} />
-              <Route path="/projetos" element={<Projects />} />
-              <Route path="/projeto/:id" element={<Project />} />
+              <Route path="/" element={<Home/>} />
+              <Route path="/novo-projeto" element={<NewRegister/>} />
+              <Route path="/projetos" element={<Projects/>} />
+              <Route path="/projeto/:id" element={<Project/>} />
             </Routes>
           </Row>
         </Container>
