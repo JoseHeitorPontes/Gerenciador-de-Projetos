@@ -11,9 +11,8 @@ import { api } from "../../services/api";
 
 import { useNavigate } from "react-router-dom";
 
-import { ButtonNewProject } from "../../components/ButtonNewProject";
-
 import "./styles.css";
+import { ButtonNavigate } from "../../components/ButtonNavigate";
 
 export function Projects() {
     const {projects, fetchProjects} = useProjects();
@@ -39,7 +38,10 @@ export function Projects() {
         <div className="col-xl-12">
             <div className="d-flex justify-content-between align-items-center px-2 mb-4">
                 <h2>Meus Projetos</h2>
-                <ButtonNewProject />
+                <ButtonNavigate
+                    textButton="Novo Projeto"
+                    navigateLink="/novo-projeto"
+                />
             </div>
             {
                 projects.length > 0 ? (
@@ -50,8 +52,8 @@ export function Projects() {
                                     <Card className="card-project">
                                         <Card.Body>
                                             <Card.Title>{project.name}</Card.Title>
-                                            <p>Categoria: {project.category}</p>
-                                            <p>Orçamento: {project.budget}</p>
+                                            <p className="m-0">Orçamento: R$ {project.budget}</p>
+                                            <p className="m-0">{project.category}</p>
                                         </Card.Body>
                                         <Card.Footer className="d-flex justify-content-end">
                                             <Button 

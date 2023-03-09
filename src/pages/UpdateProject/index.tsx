@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import { api } from "../../services/api";
 
@@ -23,11 +23,21 @@ export function UpdateProject() {
 
     return (
         <>
-            <div>
-                <h1>{project.name}</h1>
+            <div className="border-bottom border-dark">
+                <div className="d-flex justify-content-between align-items-center">
+                    <h1>{project.name}</h1>
+                    <Button
+                        variant="dark"
+                    >
+                        Editar Projeto
+                    </Button>
+                </div>
+                <div className="mb-4">
+                    <p className="m-0">Categoria: {project.category}</p>
+                    <p className="m-0">Total de Orçamento: R$ {project.budget}</p>
+                    <p className="m-0">Total Gasto: R$ 0</p>
+                </div>
             </div>
-            <p>Categoria: {project.category}</p>
-            <p>Total de Orçamento: {project.budget}</p>
         </>
     );
 }
