@@ -1,14 +1,14 @@
-import { Container, Row } from 'react-bootstrap';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Header } from './components/Header';
+import { Container, Row } from "react-bootstrap";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header";
 
-import { Home } from './pages/Home';
+import { Home } from "./pages/Home";
 import { NewRegister } from "./pages/NewProject";
-import { Projects } from './pages/Projects';
-import { UpdateProject } from './pages/UpdateProject';
+import { Projects } from "./pages/Projects";
+import { UpdateProject } from "./pages/UpdateProject";
 
-import { ToastContainer } from 'react-toastify';
-import { Footer } from './components/Footer';
+import { ToastContainer } from "react-toastify";
+import { Footer } from "./components/Footer";
 
 import "./App.css";
 
@@ -21,10 +21,10 @@ function App() {
           <ToastContainer />
           <Row>
             <Routes>
-              <Route path="/" element={<Home/>} />
-              <Route path="/novo-projeto" element={<NewRegister/>} />
-              <Route path="/projetos" element={<Projects/>} />
-              <Route path="/projeto/:id" element={<UpdateProject/>} />
+              <Route path="/" element={<Home />} />
+              <Route path="/novo-projeto" element={<NewRegister />} />
+              <Route path="/projetos" element={<Projects />} />
+              <Route path="/projetos/:id" element={<UpdateProject />} />
             </Routes>
           </Row>
         </Container>
