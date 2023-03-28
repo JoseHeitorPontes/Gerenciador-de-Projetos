@@ -1,11 +1,11 @@
 import { FormEvent, useState } from "react";
-import { Form, Button } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 
-import { api } from "../../services/api";
-
+import { Form, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
+
+import { api } from "../../services/api";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -49,7 +49,7 @@ export function NewRegister() {
 
   return (
     <div className="col-xl-12 d-flex justify-content-center">
-      <Form id="form-register-project" className="col-xl-4">
+      <Form id="form-register-project">
         <h1>Criar Projeto</h1>
         <p className="fs-5 fw-800 text-muted">
           Crie seu projeto para depois adicionar os serviços

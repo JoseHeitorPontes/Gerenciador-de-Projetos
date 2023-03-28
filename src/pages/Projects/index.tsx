@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { Button, Card } from "react-bootstrap";
 import { useProjects } from "../../hooks/useProjects";
 
@@ -5,14 +7,13 @@ import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
 import Swal from "sweetalert2";
-import { Project } from "../../@types/project";
 
 import { api } from "../../services/api";
+import { Project } from "../../@types/project";
 
-import { useNavigate } from "react-router-dom";
+import { ButtonNavigate } from "../../components/ButtonNavigate";
 
 import "./styles.css";
-import { ButtonNavigate } from "../../components/ButtonNavigate";
 
 export function Projects() {
   const { projects, fetchProjects } = useProjects();

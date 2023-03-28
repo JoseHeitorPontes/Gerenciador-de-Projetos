@@ -2,7 +2,7 @@
   "projects": [
     {
       "name": "Design Logo",
-      "budget": "100",
+      "budget": "200",
       "category": "Design",
       "id": 1
     },
@@ -15,7 +15,7 @@
     {
       "name": "Site Moranguinho",
       "budget": "200",
-      "category": "Desenvolvimento",
+      "category": "Design",
       "id": 4
     },
     {

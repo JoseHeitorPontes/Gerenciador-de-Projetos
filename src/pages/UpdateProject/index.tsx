@@ -1,25 +1,29 @@
 import { useState, useEffect, FormEvent } from "react";
+
 import { useParams } from "react-router-dom";
 
 import { Button, Form } from "react-bootstrap";
-
-import { api } from "../../services/api";
-
-import { Project } from "../../@types/project";
+import { toast } from "react-toastify";
 
 import { useFormProject } from "../../hooks/useFormOrListProject";
-import { toast } from "react-toastify";
+import { api } from "../../services/api";
+import { Project } from "../../@types/project";
+import { FormServices } from "../../components/FormServices";
 
 export function UpdateProject() {
   const { id } = useParams();
 
+  const [project, setProject] = useState({} as Project);
   const [name, setName] = useState("");
   const [budget, setBudget] = useState("");
   const [category, setCategory] = useState("");
 
+  const [showFormServices, setShowFormServices] = useState(false);
+
   async function handleFethcDataProject() {
     const { data } = await api.get(`/projects/${id}`);
 
+    setProject(data);
     setName(data.name);
     setBudget(data.budget);
     setCategory(data.category);
@@ -35,6 +39,7 @@ export function UpdateProject() {
         category,
       });
 
+      handleFethcDataProject();
       setViewForm(false);
 
       toast.success("Projeto editado com sucesso!", {
@@ -62,7 +67,7 @@ export function UpdateProject() {
     <>
       <div className="border-bottom border-dark">
         <div className="d-flex justify-content-between align-items-center">
-          <h2>{name}</h2>
+          <h2>{project.name}</h2>
           <Button
             variant="dark"
             onClick={() => {
@@ -77,7 +82,7 @@ export function UpdateProject() {
           </Button>
         </div>
         {viewForm ? (
-          <Form className="mb-2">
+          <Form className="col-xl-5 mb-4">
             <Form.Group>
               <Form.Label>Nome do projeto:</Form.Label>
               <Form.Control
@@ -124,8 +129,20 @@ export function UpdateProject() {
       <div className="border-bottom border-dark">
         <div className="d-flex justify-content-between align-items-center my-2">
           <h2>Adicionar Serviço</h2>
-          <Button variant="dark">Novo Serviço</Button>
+          <Button
+            variant="dark"
+            onClick={() => {
+              if (!showFormServices) {
+                setShowFormServices(true);
+              } else {
+                setShowFormServices(false);
+              }
+            }}
+          >
+            Novo Serviço
+          </Button>
         </div>
+        <FormServices show={showFormServices} className="col-xl-5 mb-4" />
       </div>
       <div className="my-2">
         <h2>Serviços</h2>
