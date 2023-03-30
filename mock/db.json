@@ -1,28 +1,17 @@
 {
   "projects": [
     {
-      "name": "Design Logo",
-      "budget": "200",
-      "category": "Design",
-      "id": 1
-    },
-    {
-      "name": "Design Banner",
-      "budget": "200",
-      "category": "Design",
-      "id": 3
-    },
-    {
-      "name": "Site Moranguinho",
-      "budget": "200",
-      "category": "Design",
-      "id": 4
-    },
-    {
-      "name": "Site Loja",
-      "budget": "1000",
+      "name": "E-Commerce",
+      "budget": 400,
       "category": "Desenvolvimento",
-      "id": 5
+      "services": [
+        {
+          "name": "Definição do layout",
+          "description": "Criação do figma e definição do layout.",
+          "cost": "100"
+        }
+      ],
+      "id": 1
     }
   ]
 }

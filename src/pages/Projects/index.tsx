@@ -1,10 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
-import { Button, Card } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 import { useProjects } from "../../hooks/useProjects";
-
-import { FaTrash } from "react-icons/fa";
-import { MdEdit } from "react-icons/md";
 
 import Swal from "sweetalert2";
 
@@ -12,6 +9,8 @@ import { api } from "../../services/api";
 import { Project } from "../../@types/project";
 
 import { ButtonNavigate } from "../../components/ButtonNavigate";
+import { ButtonDelete } from "../../components/ButtonDelete";
+import { ButtonEdit } from "../../components/ButtonEdit";
 
 import "./styles.css";
 
@@ -52,28 +51,22 @@ export function Projects() {
               className="col-xl-4 d-flex justify-content-center"
             >
               <Card className="card-project">
-                <Card.Body>
+                <Card.Header className="bg-dark text-warning">
                   <Card.Title>{project.name}</Card.Title>
+                </Card.Header>
+                <Card.Body>
                   <p className="m-0">Orçamento: R$ {project.budget}</p>
                   <p className="m-0">{project.category}</p>
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-end">
-                  <Button
-                    variant="danger"
-                    className="mx-1"
-                    onClick={() => handleDeleteProject(project)}
-                  >
-                    Excluir
-                    <FaTrash className="ms-2" />
-                  </Button>
-                  <Button
-                    variant="success"
-                    className="mx-1"
-                    onClick={() => navigate(`/projetos/${project.id}`)}
-                  >
-                    Editar
-                    <MdEdit className="ms-2" />
-                  </Button>
+                  <ButtonDelete
+                    content="Excluir"
+                    handleDelete={() => handleDeleteProject(project)}
+                  />
+                  <ButtonEdit
+                    content="Editar"
+                    handleClick={() => navigate(`${project.id}`)}
+                  />
                 </Card.Footer>
               </Card>
             </div>

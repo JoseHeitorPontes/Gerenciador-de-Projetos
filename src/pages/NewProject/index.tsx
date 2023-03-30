@@ -24,6 +24,7 @@ export function NewRegister() {
         name,
         budget,
         category,
+        services: [],
       });
 
       setName("");

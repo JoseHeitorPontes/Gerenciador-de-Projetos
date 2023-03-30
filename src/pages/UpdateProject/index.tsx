@@ -2,13 +2,15 @@ import { useState, useEffect, FormEvent } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { Button, Form } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 import { useFormProject } from "../../hooks/useFormOrListProject";
 import { api } from "../../services/api";
 import { Project } from "../../@types/project";
-import { FormServices } from "../../components/FormServices";
+import { FormServicesRegister } from "../../components/FormServicesRegister";
+import { Service } from "../../@types/service";
+import { ButtonDelete } from "../../components/ButtonDelete";
 
 export function UpdateProject() {
   const { id } = useParams();
@@ -17,6 +19,7 @@ export function UpdateProject() {
   const [name, setName] = useState("");
   const [budget, setBudget] = useState("");
   const [category, setCategory] = useState("");
+  const [services, setServices] = useState<Service[]>([]);
 
   const [showFormServices, setShowFormServices] = useState(false);
 
@@ -27,6 +30,7 @@ export function UpdateProject() {
     setName(data.name);
     setBudget(data.budget);
     setCategory(data.category);
+    setServices(data.services);
   }
 
   async function handleUpdateProject(event: FormEvent) {
@@ -94,8 +98,8 @@ export function UpdateProject() {
             <Form.Group>
               <Form.Label>Orçamento do projeto:</Form.Label>
               <Form.Control
-                placeholder="Insira o orçamento do projeto..."
                 value={budget}
+                placeholder="Insira o orçamento do projeto..."
                 onChange={(event) => setBudget(event.target.value)}
               />
             </Form.Group>
@@ -142,10 +146,33 @@ export function UpdateProject() {
             Novo Serviço
           </Button>
         </div>
-        <FormServices show={showFormServices} className="col-xl-5 mb-4" />
+        <FormServicesRegister
+          project={project}
+          show={showFormServices}
+          className="col-xl-5 mb-4"
+        />
       </div>
-      <div className="my-2">
+      <div className="mb-4">
         <h2>Serviços</h2>
+        <div className="d-flex">
+          {services.map((service) => {
+            return (
+              <Card>
+                <Card.Header className="bg-dark">
+                  <Card.Title className="text-warning">
+                    {service.name}
+                  </Card.Title>
+                </Card.Header>
+                <Card.Body>
+                  <p>Custo: R${service.cost}</p>
+                </Card.Body>
+                <Card.Footer>
+                  <ButtonDelete />
+                </Card.Footer>
+              </Card>
+            );
+          })}
+        </div>
       </div>
     </>
   );
