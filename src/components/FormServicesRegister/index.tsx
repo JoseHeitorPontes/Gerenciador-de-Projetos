@@ -28,21 +28,19 @@ export function FormServicesRegister({ project, show, ...rest }: Props) {
 
     if (project.budget > costService) {
       const budget = project.budget - costService;
-      const newServices = [
-        ...project.services,
-        {
-          id: uuidv4(),
-          name,
-          description,
-          cost,
-        },
-      ];
+      const services = project.services;
+      services.push({
+        id: uuidv4(),
+        name,
+        description,
+        cost,
+      });
 
       try {
         await api.put(`/projects/${project.id}`, {
           ...project,
           budget,
-          services: newServices,
+          services,
         });
 
         setName("");
