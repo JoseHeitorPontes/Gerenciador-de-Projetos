@@ -51,8 +51,10 @@ export function Projects() {
               className="col-xl-4 d-flex justify-content-center"
             >
               <Card className="card-project">
-                <Card.Header className="bg-dark text-warning">
-                  <Card.Title>{project.name}</Card.Title>
+                <Card.Header className="bg-dark">
+                  <Card.Title className="text-warning">
+                    {project.name}
+                  </Card.Title>
                 </Card.Header>
                 <Card.Body>
                   <p className="m-0">Orçamento: R$ {project.budget}</p>

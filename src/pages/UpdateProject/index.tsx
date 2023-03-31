@@ -5,12 +5,15 @@ import { useParams } from "react-router-dom";
 import { Button, Card, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-import { useFormProject } from "../../hooks/useFormOrListProject";
 import { api } from "../../services/api";
+import { useFormProject } from "../../hooks/useFormOrListProject";
 import { Project } from "../../@types/project";
-import { FormServicesRegister } from "../../components/FormServicesRegister";
 import { Service } from "../../@types/service";
+
+import { FormServicesRegister } from "../../components/FormServicesRegister";
 import { ButtonDelete } from "../../components/ButtonDelete";
+
+import "./styles.css";
 
 export function UpdateProject() {
   const { id } = useParams();
@@ -70,7 +73,7 @@ export function UpdateProject() {
   return (
     <>
       <div className="border-bottom border-dark">
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-between align-items-center px-2">
           <h2>{project.name}</h2>
           <Button
             variant="dark"
@@ -86,7 +89,7 @@ export function UpdateProject() {
           </Button>
         </div>
         {viewForm ? (
-          <Form className="col-xl-5 mb-4">
+          <Form className="col-xl-5 mb-4 px-2">
             <Form.Group>
               <Form.Label>Nome do projeto:</Form.Label>
               <Form.Control
@@ -122,7 +125,7 @@ export function UpdateProject() {
           </Form>
         ) : (
           <>
-            <div className="mb-4">
+            <div className="mb-4 px-2">
               <p className="m-0">Categoria: {category}</p>
               <p className="m-0">Total de Orçamento: R$ {budget}</p>
               <p className="m-0">Total Gasto: R$ 0</p>
@@ -131,7 +134,7 @@ export function UpdateProject() {
         )}
       </div>
       <div className="border-bottom border-dark">
-        <div className="d-flex justify-content-between align-items-center my-2">
+        <div className="d-flex justify-content-between align-items-center my-2 px-2">
           <h2>Adicionar Serviço</h2>
           <Button
             variant="dark"
@@ -149,29 +152,35 @@ export function UpdateProject() {
         <FormServicesRegister
           project={project}
           show={showFormServices}
-          className="col-xl-5 mb-4"
+          className="col-xl-5 mb-4 px-2"
         />
       </div>
-      <div className="mb-4">
-        <h2>Serviços</h2>
-        <div className="d-flex">
-          {services.map((service) => {
-            return (
-              <Card>
+      <div className="col-xl-12">
+        <div className="px-2">
+          <h2>Serviços</h2>
+        </div>
+        <div className="d-flex flex-wrap">
+          {services.map((service) => (
+            <div
+              key={service.id}
+              className="col-xl-4 d-flex justify-content-center"
+            >
+              <Card className="card-service">
                 <Card.Header className="bg-dark">
                   <Card.Title className="text-warning">
                     {service.name}
                   </Card.Title>
                 </Card.Header>
                 <Card.Body>
+                  <p>{service.description}</p>
                   <p>Custo: R${service.cost}</p>
                 </Card.Body>
-                <Card.Footer>
-                  <ButtonDelete />
+                <Card.Footer className="d-flex justify-content-end">
+                  <ButtonDelete content="Excluir" />
                 </Card.Footer>
               </Card>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </>

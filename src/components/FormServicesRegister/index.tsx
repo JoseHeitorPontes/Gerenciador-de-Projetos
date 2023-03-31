@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { v4 as uuidv4 } from "uuid";
+
 import { Button, Form, FormProps } from "react-bootstrap";
 import { toast } from "react-toastify";
 
@@ -26,18 +28,21 @@ export function FormServicesRegister({ project, show, ...rest }: Props) {
 
     if (project.budget > costService) {
       const budget = project.budget - costService;
-      const services = project.services;
-      services.push({
-        name,
-        description,
-        cost,
-      });
+      const newServices = [
+        ...project.services,
+        {
+          id: uuidv4(),
+          name,
+          description,
+          cost,
+        },
+      ];
 
       try {
         await api.put(`/projects/${project.id}`, {
           ...project,
           budget,
-          services,
+          services: newServices,
         });
 
         setName("");
