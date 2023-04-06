@@ -2,43 +2,29 @@
   "projects": [
     {
       "name": "E-Commerce",
-      "budget": 350,
+      "budget": 650,
       "category": "Desenvolvimento",
       "services": [
         {
-          "id": "00c64bfb-d449-4e78-af46-3bdeca47c82c",
+          "id": "8a25fc1f-0372-495f-86ce-db1c37026f4c",
+          "name": "Design E-Commerce",
+          "description": "Criação e definição do design do e-commerce.",
+          "cost": "350"
+        },
+        {
+          "id": "7827fba0-5663-42d1-a8a2-46dd7da40418",
           "name": "Criação da Home",
           "description": "Criação da página principal do e-commerce.",
-          "cost": "100"
+          "cost": "400"
         },
         {
-          "id": "e4da5245-938f-464b-b21b-28623e84134a",
-          "name": "Criação da Página de Contatos",
+          "id": "1336140f-8817-46f1-894d-d6f92d6bcafe",
+          "name": "Criação da página de Contatos",
           "description": "Criação da página de contatos do e-commerce.",
-          "cost": "200"
-        },
-        {
-          "id": "d8c8ac13-121c-4085-93a5-bb4c89a4e77e",
-          "name": "Banner",
-          "description": "Criação do design do banner.",
-          "cost": "250"
+          "cost": "100"
         }
       ],
       "id": 1
-    },
-    {
-      "name": "Site Moranguinho",
-      "budget": "1000",
-      "category": "Desenvolvimento",
-      "services": [],
-      "id": 2
-    },
-    {
-      "name": "Banner",
-      "budget": "250",
-      "category": "Design",
-      "services": [],
-      "id": 3
     }
   ]
 }

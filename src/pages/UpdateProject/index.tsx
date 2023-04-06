@@ -10,13 +10,17 @@ import { useFormProject } from "../../hooks/useFormOrListProject";
 import { Project } from "../../@types/project";
 import { Service } from "../../@types/service";
 
-import { FormServicesRegister } from "../../components/FormServicesRegister";
+import { ModalEditService } from "../../components/ModalEditService";
+import { FormRegisterService } from "../../components/FormRegisterService";
 import { ButtonDelete } from "../../components/ButtonDelete";
+import { ButtonEdit } from "../../components/ButtonEdit";
 
 import "./styles.css";
 
 export function UpdateProject() {
   const { id } = useParams();
+
+  const { viewForm, setViewForm } = useFormProject();
 
   const [project, setProject] = useState({} as Project);
   const [name, setName] = useState("");
@@ -25,6 +29,12 @@ export function UpdateProject() {
   const [services, setServices] = useState<Service[]>([]);
 
   const [showFormServices, setShowFormServices] = useState(false);
+
+  const [showModalService, setShowModalService] = useState(false);
+  const handleShowModalService = () => setShowModalService(true);
+  const handleCloseModalService = () => setShowModalService(false);
+
+  const [serviceSelected, setServiceSelected] = useState({} as Service);
 
   async function handleFethcDataProject() {
     const { data } = await api.get(`/projects/${id}`);
@@ -44,6 +54,7 @@ export function UpdateProject() {
         name,
         budget,
         category,
+        services,
       });
 
       handleFethcDataProject();
@@ -67,8 +78,6 @@ export function UpdateProject() {
   useEffect(() => {
     handleFethcDataProject();
   }, []);
-
-  const { viewForm, setViewForm } = useFormProject();
 
   return (
     <>
@@ -128,11 +137,12 @@ export function UpdateProject() {
             <div className="mb-4 px-2">
               <p className="m-0">Categoria: {category}</p>
               <p className="m-0">Total de Orçamento: R$ {budget}</p>
-              <p className="m-0">Total Gasto: R$ 0</p>
+              <p className="m-0">Total Gasto: R$ </p>
             </div>
           </>
         )}
       </div>
+
       <div className="border-bottom border-dark">
         <div className="d-flex justify-content-between align-items-center my-2 px-2">
           <h2>Adicionar Serviço</h2>
@@ -149,18 +159,30 @@ export function UpdateProject() {
             Novo Serviço
           </Button>
         </div>
-        <FormServicesRegister
+        <FormRegisterService
           project={project}
           show={showFormServices}
+          setShow={setShowFormServices}
           className="col-xl-5 mb-4 px-2"
+          fetchProduct={handleFethcDataProject}
         />
       </div>
+
+      <ModalEditService
+        id="modal-edit-service"
+        show={showModalService}
+        onHide={handleCloseModalService}
+        project={project}
+        serviceSelected={serviceSelected}
+        fetchProduct={handleFethcDataProject}
+      />
+
       <div className="col-xl-12">
-        <div className="px-2">
+        <div className="px-2 mt-2">
           <h2>Serviços</h2>
         </div>
         <div className="d-flex flex-wrap">
-          {services.map((service) => (
+          {services?.map((service) => (
             <div
               key={service.id}
               className="col-xl-4 d-flex justify-content-center"
@@ -177,6 +199,13 @@ export function UpdateProject() {
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-end">
                   <ButtonDelete content="Excluir" />
+                  <ButtonEdit
+                    content="Editar"
+                    handleClick={() => {
+                      handleShowModalService();
+                      setServiceSelected(service);
+                    }}
+                  />
                 </Card.Footer>
               </Card>
             </div>

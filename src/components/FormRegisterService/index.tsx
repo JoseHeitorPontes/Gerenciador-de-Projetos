@@ -16,9 +16,11 @@ import "./styles.css";
 type Props = FormProps & {
   project: Project;
   show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchProduct: () => Promise<void>;
 };
 
-export function FormServicesRegister({ project, show, ...rest }: Props) {
+export function FormRegisterService({ project, show, setShow, fetchProduct, ...rest }: Props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [cost, setCost] = useState("");
@@ -28,26 +30,40 @@ export function FormServicesRegister({ project, show, ...rest }: Props) {
 
     if (project.budget > costService) {
       const budget = project.budget - costService;
-      const newServices = [
-        ...project.services,
-        {
-          id: uuidv4(),
-          name,
-          description,
-          cost,
-        },
-      ];
 
       try {
         await api.put(`/projects/${project.id}`, {
           ...project,
           budget,
-          services: newServices,
+          services: [
+            ...project.services,
+            {
+              id: uuidv4(),
+              name,
+              description,
+              cost,
+            },
+          ],
         });
 
         setName("");
         setDescription("");
         setCost("");
+
+        setShow(false);
+
+        fetchProduct();
+
+        toast.success("Serviço cadastrado com sucesso!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } catch (error) {
         console.log(error);
       }
