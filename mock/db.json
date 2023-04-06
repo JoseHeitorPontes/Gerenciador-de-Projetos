@@ -1,30 +1,37 @@
 {
   "projects": [
     {
-      "name": "E-Commerce",
-      "budget": 550,
+      "name": "Criação da E-Commerce",
+      "budget": 3750,
       "category": "Desenvolvimento",
       "services": [
         {
-          "id": "7827fba0-5663-42d1-a8a2-46dd7da40418",
+          "id": "8b15f0ce-55eb-4558-8c59-944b30351e50",
+          "name": "Criação e Definição do Design",
+          "description": "Criação e definição do design do e-commerce.",
+          "cost": 500
+        },
+        {
+          "id": "67c23e2d-c4b9-4426-b263-10fa01bc4e0b",
           "name": "Criação da Home",
           "description": "Criação da página principal do e-commerce.",
-          "cost": "400"
+          "cost": 500
         },
         {
-          "id": "1336140f-8817-46f1-894d-d6f92d6bcafe",
+          "id": "1fe9909c-9781-4df5-9cdb-7f3093caa7e5",
           "name": "Criação da página de Contatos",
           "description": "Criação da página de contatos do e-commerce.",
-          "cost": "100"
-        },
-        {
-          "id": "8a25fc1f-0372-495f-86ce-db1c37026f4c",
-          "name": "Design E-Commerce",
-          "description": "Criação e definição do design do e-commerce.",
-          "cost": "450"
+          "cost": "250"
         }
       ],
       "id": 1
+    },
+    {
+      "name": "Moranguinho",
+      "budget": "1000000",
+      "category": "Infra",
+      "services": [],
+      "id": 2
     }
   ]
 }

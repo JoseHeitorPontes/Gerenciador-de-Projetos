@@ -56,7 +56,7 @@ export function FormRegisterService({ project, show, setShow, fetchProduct, ...r
 
         toast.success("Serviço cadastrado com sucesso!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -70,7 +70,7 @@ export function FormRegisterService({ project, show, setShow, fetchProduct, ...r
     } else {
       toast.error("Orçamento ultrapassado, verifique o custo do serviço!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

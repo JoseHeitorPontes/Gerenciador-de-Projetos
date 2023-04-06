@@ -33,7 +33,7 @@ export function NewRegister() {
 
       toast.success("Projeto cadastrado com sucesso!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

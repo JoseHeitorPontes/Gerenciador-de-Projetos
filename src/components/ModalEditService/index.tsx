@@ -27,7 +27,7 @@ export function ModalEditService({ project, serviceSelected, fetchProduct, ...re
     id,
     name: name || String(serviceSelected?.name),
     description: description || String(serviceSelected?.description),
-    cost: cost || String(serviceSelected?.cost),
+    cost: Number(cost) || Number(serviceSelected?.cost),
   });
 
   const serviceCost = Number(cost) - Number(serviceSelected?.cost);
@@ -45,7 +45,7 @@ export function ModalEditService({ project, serviceSelected, fetchProduct, ...re
 
       toast.success("Serviço editado com sucesso!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -76,6 +76,7 @@ export function ModalEditService({ project, serviceSelected, fetchProduct, ...re
           <Form.Group>
             <Form.Label>Descrição do Serviço:</Form.Label>
             <Form.Control
+              as="textarea"
               defaultValue={serviceSelected?.description}
               onChange={(event) => setDescription(event.target.value)}
               placeholder="Insira a descrição do serviço..."
@@ -84,6 +85,7 @@ export function ModalEditService({ project, serviceSelected, fetchProduct, ...re
           <Form.Group>
             <Form.Label>Preço do Serviço:</Form.Label>
             <Form.Control
+              type="number"
               defaultValue={serviceSelected?.cost}
               onChange={(event) => setCost(event.target.value)}
               placeholder="Insira o preço do serviço..."

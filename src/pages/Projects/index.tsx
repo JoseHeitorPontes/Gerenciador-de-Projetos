@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
-import { useProjects } from "../../hooks/useProjects";
-
 import Swal from "sweetalert2";
 
+import { useProjects } from "../../hooks/useProjects";
 import { api } from "../../services/api";
 import { Project } from "../../@types/project";
 
@@ -63,11 +62,11 @@ export function Projects() {
                 <Card.Footer className="d-flex justify-content-end">
                   <ButtonDelete
                     content="Excluir"
-                    handleDelete={() => handleDeleteProject(project)}
+                    onClick={() => handleDeleteProject(project)}
                   />
                   <ButtonEdit
                     content="Editar"
-                    handleClick={() => navigate(`${project.id}`)}
+                    onClick={() => navigate(`${project.id}`)}
                   />
                 </Card.Footer>
               </Card>

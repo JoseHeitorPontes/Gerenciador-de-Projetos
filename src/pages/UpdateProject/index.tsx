@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { Button, Card, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 import { api } from "../../services/api";
 import { useFormProject } from "../../hooks/useFormOrListProject";
@@ -57,12 +58,11 @@ export function UpdateProject() {
         services,
       });
 
-      handleFethcDataProject();
       setViewForm(false);
-
+      
       toast.success("Projeto editado com sucesso!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -70,9 +70,43 @@ export function UpdateProject() {
         progress: undefined,
         theme: "light",
       });
+      
+      handleFethcDataProject();
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async function handleDeleteService(idService: string) {
+    Swal.fire({
+      icon: "question",
+      title: "Deseja excluir este projeto?",
+      showCancelButton: true,
+      confirmButtonText: "Excluir",
+      confirmButtonColor: "#dc3545",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newServices = project?.services?.filter((service) => service.id !== idService) as Service[];
+        api.put(`/projects/${id}`, {
+          ...project,
+          services: [...newServices],
+        });
+
+        toast.success("Serviço deletado com sucesso!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
+        handleFethcDataProject();
+      }
+    });
   }
 
   useEffect(() => {
@@ -137,7 +171,7 @@ export function UpdateProject() {
             <div className="mb-4 px-2">
               <p className="m-0">Categoria: {category}</p>
               <p className="m-0">Total de Orçamento: R$ {budget}</p>
-              <p className="m-0">Total Gasto: R$ </p>
+              <p className="m-0">Total Gasto: R$</p>
             </div>
           </>
         )}
@@ -198,10 +232,10 @@ export function UpdateProject() {
                   <p>Custo: R${service.cost}</p>
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-end">
-                  <ButtonDelete content="Excluir" />
+                  <ButtonDelete content="Excluir" onClick={() => handleDeleteService(service.id)} />
                   <ButtonEdit
                     content="Editar"
-                    handleClick={() => {
+                    onClick={() => {
                       handleShowModalService();
                       setServiceSelected(service);
                     }}
