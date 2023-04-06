@@ -2,15 +2,9 @@
   "projects": [
     {
       "name": "E-Commerce",
-      "budget": 650,
+      "budget": 550,
       "category": "Desenvolvimento",
       "services": [
-        {
-          "id": "8a25fc1f-0372-495f-86ce-db1c37026f4c",
-          "name": "Design E-Commerce",
-          "description": "Criação e definição do design do e-commerce.",
-          "cost": "350"
-        },
         {
           "id": "7827fba0-5663-42d1-a8a2-46dd7da40418",
           "name": "Criação da Home",
@@ -22,6 +16,12 @@
           "name": "Criação da página de Contatos",
           "description": "Criação da página de contatos do e-commerce.",
           "cost": "100"
+        },
+        {
+          "id": "8a25fc1f-0372-495f-86ce-db1c37026f4c",
+          "name": "Design E-Commerce",
+          "description": "Criação e definição do design do e-commerce.",
+          "cost": "450"
         }
       ],
       "id": 1
