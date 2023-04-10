@@ -216,34 +216,42 @@ export function UpdateProject() {
           <h2>Serviços</h2>
         </div>
         <div className="d-flex flex-wrap">
-          {services?.map((service) => (
-            <div
-              key={service.id}
-              className="col-xl-4 d-flex justify-content-center"
-            >
-              <Card className="card-service">
-                <Card.Header className="bg-dark">
-                  <Card.Title className="text-warning">
-                    {service.name}
-                  </Card.Title>
-                </Card.Header>
-                <Card.Body>
-                  <p>{service.description}</p>
-                  <p>Custo: R${service.cost}</p>
-                </Card.Body>
-                <Card.Footer className="d-flex justify-content-end">
-                  <ButtonDelete content="Excluir" onClick={() => handleDeleteService(service.id)} />
-                  <ButtonEdit
-                    content="Editar"
-                    onClick={() => {
-                      handleShowModalService();
-                      setServiceSelected(service);
-                    }}
-                  />
-                </Card.Footer>
-              </Card>
-            </div>
-          ))}
+          {!services?.length ? (
+            <h5 className="px-2 text-secondary text-center">
+              Sem serviços cadastrados para este projeto!
+            </h5>
+          ) : (
+            <>
+              {services?.map((service) => (
+                <div
+                  key={service.id}
+                  className="col-xl-4 d-flex justify-content-center"
+                >
+                  <Card className="card-service">
+                    <Card.Header className="bg-dark">
+                      <Card.Title className="text-warning">
+                        {service.name}
+                      </Card.Title>
+                    </Card.Header>
+                    <Card.Body>
+                      <p>{service.description}</p>
+                      <p>Custo: R${service.cost}</p>
+                    </Card.Body>
+                    <Card.Footer className="d-flex justify-content-end">
+                      <ButtonDelete content="Excluir" onClick={() => handleDeleteService(service.id)} />
+                      <ButtonEdit
+                        content="Editar"
+                        onClick={() => {
+                          handleShowModalService();
+                          setServiceSelected(service);
+                        }}
+                      />
+                    </Card.Footer>
+                  </Card>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </>
