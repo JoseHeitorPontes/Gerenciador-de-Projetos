@@ -29,6 +29,8 @@ export function UpdateProject() {
   const [category, setCategory] = useState("");
   const [services, setServices] = useState<Service[]>([]);
 
+  const [totalSpend, setTotalSpend] = useState(0);
+
   const [showFormServices, setShowFormServices] = useState(false);
 
   const [showModalService, setShowModalService] = useState(false);
@@ -45,6 +47,11 @@ export function UpdateProject() {
     setBudget(data.budget);
     setCategory(data.category);
     setServices(data.services);
+
+    const servicesArray = data.services as Service[];
+
+    const acumulatorCostsServices = servicesArray.reduce((initialValue, service) =>initialValue + Number(service.cost), 0);
+    setTotalSpend(acumulatorCostsServices);
   }
 
   async function handleUpdateProject(event: FormEvent) {
@@ -171,7 +178,7 @@ export function UpdateProject() {
             <div className="mb-4 px-2">
               <p className="m-0">Categoria: {category}</p>
               <p className="m-0">Total de Orçamento: R$ {budget}</p>
-              <p className="m-0">Total Gasto: R$</p>
+              <p className="m-0">Total Gasto: R$ {totalSpend}</p>
             </div>
           </>
         )}

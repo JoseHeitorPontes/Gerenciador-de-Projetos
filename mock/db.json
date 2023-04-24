@@ -1,10 +1,17 @@
 {
   "projects": [
     {
-      "name": "E-Commerce",
-      "budget": "5000",
+      "name": "Site E-Commerce",
+      "budget": 9500,
       "category": "Desenvolvimento",
-      "services": [],
+      "services": [
+        {
+          "id": "54ded856-6a72-4558-9176-111f6176a33e",
+          "name": "Criação e Definição do Design",
+          "description": "Criação e definição do design do site.",
+          "cost": "500"
+        }
+      ],
       "id": 1
     }
   ]
