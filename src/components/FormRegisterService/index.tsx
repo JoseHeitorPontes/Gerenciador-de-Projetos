@@ -1,11 +1,13 @@
-import { useState } from "react";
-
 import { v4 as uuidv4 } from "uuid";
+
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 import { Button, Form, FormProps } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 import { Project } from "../../@types/project";
+import { Service } from "../../@types/service";
 
 import { api } from "../../services/api";
 
@@ -21,11 +23,7 @@ type Props = FormProps & {
 };
 
 export function FormRegisterService({ project, show, setShow, fetchProduct, ...rest }: Props) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [cost, setCost] = useState("");
-
-  async function handleRegisterService() {
+  async function handleRegisterService({ id, name, description, cost }: Service) {
     const costService = Number(cost);
 
     if (project.budget > costService) {
@@ -38,7 +36,7 @@ export function FormRegisterService({ project, show, setShow, fetchProduct, ...r
           services: [
             ...project.services,
             {
-              id: uuidv4(),
+              id,
               name,
               description,
               cost,
@@ -46,11 +44,11 @@ export function FormRegisterService({ project, show, setShow, fetchProduct, ...r
           ],
         });
 
-        setName("");
-        setDescription("");
-        setCost("");
-
         setShow(false);
+
+        formik.setFieldValue("name", "");
+        formik.setFieldValue("description", "");
+        formik.setFieldValue("cost", 1);
 
         fetchProduct();
 
@@ -81,37 +79,76 @@ export function FormRegisterService({ project, show, setShow, fetchProduct, ...r
     }
   }
 
+  const initialValues = {
+    name: "",
+    description: "",
+    cost: 1,
+  };
+
+  const ServiceFormValidation = Yup.object().shape({
+    name: Yup.string()
+      .required("O nome do serviço é um campo obrigatório!")
+      .min(5, "O nome do serviço deve conter no mínimo 5 caracteres!"),
+    description: Yup.string()
+      .required("A descrição do serviço é um campo obrigatório!")
+      .min(5, "A descrição do serviço deve conter no mínimo 5 caracteres!"),
+    cost: Yup.number()
+      .required("O campo de orçamento do serviço é um campo obrigatório!")
+      .min(1, "O custo do serviço deve ser maior que 0!"),
+  });
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: ServiceFormValidation,
+    onSubmit: (values) => {
+      const dataFormService = {
+        id: uuidv4(),
+        name: values.name,
+        description: values.description,
+        cost: values.cost,
+      };
+
+      handleRegisterService(dataFormService);
+    }
+  });
+
   return (
     <>
       {show && (
-        <Form {...rest}>
+        <Form {...rest} onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Label>Nome do Serviço:</Form.Label>
             <Form.Control
-              value={name}
-              onChange={(event) => setName(event.target.value)}
+              name="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
               placeholder="Insira o nome do Serviço..."
             />
+            <span className="text-danger">{formik.errors.name}</span>
           </Form.Group>
           <Form.Group>
             <Form.Label>Descrição do Serviço:</Form.Label>
             <Form.Control
-              value={description}
+              name="description"
               as="textarea"
-              onChange={(event) => setDescription(event.target.value)}
+              value={formik.values.description}
+              onChange={formik.handleChange}
               placeholder="Insira a descrição do Serviço..."
             />
+            <span className="text-danger">{formik.errors.description}</span>
           </Form.Group>
           <Form.Group className="mb-2">
             <Form.Label>Valor do Serviço:</Form.Label>
             <Form.Control
+              name="cost"
               type="number"
-              value={cost}
-              onChange={(event) => setCost(event.target.value)}
+              value={formik.values.cost}
+              onChange={formik.handleChange}
               placeholder="Insira o valor de custo do Serviço..."
             />
+            <span className="text-danger">{formik.errors.cost}</span>
           </Form.Group>
-          <Button variant="dark" onClick={handleRegisterService}>
+          <Button type="submit" variant="dark">
             Cadastrar Serviço
           </Button>
         </Form>

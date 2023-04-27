@@ -56,8 +56,8 @@ export function Projects() {
                   </Card.Title>
                 </Card.Header>
                 <Card.Body>
-                  <p className="m-0">Orçamento: R$ {project.budget}</p>
                   <p className="m-0">{project.category}</p>
+                  <p className="m-0">Orçamento: R$ {project.budget}</p>
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-end">
                   <ButtonDelete

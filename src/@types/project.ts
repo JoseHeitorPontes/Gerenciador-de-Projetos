@@ -1,7 +1,7 @@
 import { Service } from "./service";
 
 export type Project = {
-  id: number;
+  id?: number;
   name: string;
   budget: number;
   category: string;

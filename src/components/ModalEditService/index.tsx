@@ -31,7 +31,8 @@ export function ModalEditService({ project, serviceSelected, fetchProduct, ...re
   });
 
   const serviceCost = Number(cost) - Number(serviceSelected?.cost);
-  const budgetProject = Number(project?.budget) - serviceCost;
+
+  const budgetProject = serviceCost < 0 ? Number(project?.budget) + Math.abs(serviceCost) : Number(project?.budget) - serviceCost;
 
   async function handleUpdateService() {
     try {
@@ -40,6 +41,8 @@ export function ModalEditService({ project, serviceSelected, fetchProduct, ...re
         budget: budgetProject,
         services: [...newServices],
       });
+
+      rest.onHide?.();
 
       fetchProduct();
 
