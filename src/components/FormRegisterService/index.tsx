@@ -17,12 +17,13 @@ import "./styles.css";
 
 type Props = FormProps & {
   project: Project;
+  services: Service[];
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   fetchProduct: () => Promise<void>;
 };
 
-export function FormRegisterService({ project, show, setShow, fetchProduct, ...rest }: Props) {
+export function FormRegisterService({ project, services, show, setShow, fetchProduct, ...rest }: Props) {
   async function handleRegisterService({ id, name, description, cost }: Service) {
     const costService = Number(cost);
 
@@ -34,7 +35,7 @@ export function FormRegisterService({ project, show, setShow, fetchProduct, ...r
           ...project,
           budget,
           services: [
-            ...project.services,
+            ...services,
             {
               id,
               name,
@@ -46,15 +47,17 @@ export function FormRegisterService({ project, show, setShow, fetchProduct, ...r
 
         setShow(false);
 
-        formik.setFieldValue("name", "");
-        formik.setFieldValue("description", "");
-        formik.setFieldValue("cost", 1);
+        formik.resetForm({ values: {
+          name: "",
+          description: "",
+          cost: 1,
+        }});
 
         fetchProduct();
 
         toast.success("Serviço cadastrado com sucesso!", {
           position: "top-right",
-          autoClose: 2000,
+          autoClose: 1500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

@@ -2,7 +2,10 @@ import { useState, useEffect, FormEvent } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { Button, Card, Form } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
+
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
@@ -66,6 +69,8 @@ export function UpdateProject() {
       });
 
       setViewForm(false);
+
+      handleFethcDataProject();
       
       toast.success("Projeto editado com sucesso!", {
         position: "top-right",
@@ -77,8 +82,6 @@ export function UpdateProject() {
         progress: undefined,
         theme: "light",
       });
-      
-      handleFethcDataProject();
     } catch (error) {
       console.log(error);
     }
@@ -94,15 +97,16 @@ export function UpdateProject() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        const newServices = project?.services?.filter((service) => service.id !== idService) as Service[];
+        const newServices = services?.filter((service) => service.id !== idService) as Service[];
+
         api.put(`/projects/${id}`, {
           ...project,
           services: [...newServices],
-        });
+        }).then(() => setServices(newServices));
 
         toast.success("Serviço deletado com sucesso!", {
           position: "top-right",
-          autoClose: 2000,
+          autoClose: 1500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -110,8 +114,6 @@ export function UpdateProject() {
           progress: undefined,
           theme: "light",
         });
-
-        handleFethcDataProject();
       }
     });
   }
@@ -202,10 +204,11 @@ export function UpdateProject() {
         </div>
         <FormRegisterService
           project={project}
+          services={services}
           show={showFormServices}
           setShow={setShowFormServices}
-          className="col-xl-5 mb-4 px-2"
           fetchProduct={handleFethcDataProject}
+          className="col-xl-5 mb-4 px-2"
         />
       </div>
 

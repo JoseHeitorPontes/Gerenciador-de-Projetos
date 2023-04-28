@@ -2,19 +2,25 @@ import { useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-import { Form, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-import { Project } from "../../@types/project";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
 import { api } from "../../services/api";
 
 import "react-toastify/dist/ReactToastify.css";
 
+type DataForm = {
+  name: string,
+  budget: number,
+  category: string,
+};
+
 export function NewRegister() {
   const navigate = useNavigate();
 
-  async function handleRegisterProject({ name, budget, category }: Project) {
+  async function handleRegisterProject({ name, budget, category }: DataForm) {
     try {
       await api.post("/projects", {
         name,
@@ -25,7 +31,7 @@ export function NewRegister() {
 
       toast.success("Projeto cadastrado com sucesso!", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -61,14 +67,13 @@ export function NewRegister() {
     initialValues,
     validationSchema: ProjectFormValidation,
     onSubmit: (values) => {
-      const dataFormProject = {
+      const data = {
         name: values.name,
         budget: values.budget,
         category: values.category,
-        services: []
       };
 
-      handleRegisterProject(dataFormProject);
+      handleRegisterProject(data);
     }
   });
 
