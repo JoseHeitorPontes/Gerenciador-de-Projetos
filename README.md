@@ -8,4 +8,5 @@
 <p>☑️React Icons</p>
 <p>☑️Sweet Alert</p>
 <p>☑️React Toastify</p>
-<p>☑️Simulação de api com o Json Server</p>
+<p☑️Simulação de api com o Json Server</p>
+<p>☑️Formik</p>
