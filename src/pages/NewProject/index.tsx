@@ -79,7 +79,7 @@ export function NewRegister() {
 
   return (
     <div className="col-xl-12 d-flex justify-content-center">
-      <Form id="form-register-project" onSubmit={formik.handleSubmit}>
+      <Form id="form-register-project" data-cy="form-register-project" onSubmit={formik.handleSubmit}>
         <h1>Criar Projeto</h1>
         <p className="fs-5 fw-800 text-muted">
           Crie seu projeto para depois adicionar os serviços
@@ -88,6 +88,7 @@ export function NewRegister() {
           <Form.Label>Nome do projeto:</Form.Label>
           <Form.Control
             name="name"
+            data-cy="name-input"
             value={formik.values.name}
             onChange={formik.handleChange}
             placeholder="Insira o nome do projeto"
@@ -98,6 +99,7 @@ export function NewRegister() {
           <Form.Label>Selecione a categoria:</Form.Label>
           <Form.Select
             name="category"
+            data-cy="category-select"
             value={formik.values.category}
             onChange={formik.handleChange}
           >
@@ -114,11 +116,12 @@ export function NewRegister() {
           <Form.Control
             name="budget"
             type="number"
+            data-cy="budget-input"
             value={formik.values.budget}
             onChange={formik.handleChange}
             placeholder="Insira o orçamento do projeto"
           />
-          <span className="fs-7 text-danger">{formik.errors.budget}</span>
+          <span data-cy="budget-error" className="fs-7 text-danger">{formik.errors.budget}</span>
         </Form.Group>
         <Button variant="dark" type="submit">
           Cadastrar
